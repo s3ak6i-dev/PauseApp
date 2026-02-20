@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/dm-mono/400.css';
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #1C1C2E; }
+  ::-webkit-scrollbar-thumb { background: #4A4A62; border-radius: 9999px; }
+
+  ::selection { background-color: rgba(124, 140, 248, 0.3); }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(124, 140, 248, 0.4);
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Breath animation for BreathRing */
+  .breath-element {
+    animation:
+      breathScale   12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite,
+      breathOpacity 12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  }
+
+  @keyframes breathScale {
+    0%,  100% { transform: scale(1.0); }
+    33%       { transform: scale(1.4); }
+    50%       { transform: scale(1.4); }
+  }
+
+  @keyframes breathOpacity {
+    0%,  100% { opacity: 0.6; }
+    33%       { opacity: 1.0; }
+    50%       { opacity: 1.0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .breath-element {
+      animation: breathOpacityOnly 12s ease-in-out infinite;
+      transform: none !important;
+    }
+    @keyframes breathOpacityOnly {
+      0%,  100% { opacity: 0.5; }
+      50%       { opacity: 1.0; }
+    }
+  }
+}
